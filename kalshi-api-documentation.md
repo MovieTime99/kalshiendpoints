@@ -47,7 +47,7 @@ Most endpoints are **public** and don't require any authentication. Private endp
 
 **Example:**
 ```
-GET https://api.elections.kalshi.com/v1/social/profile/holdings?nickname=Delta0x&limit=100
+GET https://api.elections.kalshi.com/v1/social/profile/holdings?nickname=LBG21&limit=100
 ```
 
 ---
@@ -79,7 +79,7 @@ GET https://api.elections.kalshi.com/v1/social/profile/holdings?nickname=Delta0x
 
 **Example:**
 ```
-GET https://api.elections.kalshi.com/v1/social/profile/metrics?nickname=Delta0x&since_day_before=0
+GET https://api.elections.kalshi.com/v1/social/profile/metrics?nickname=LBG21&since_day_before=0
 ```
 
 ---
@@ -113,7 +113,7 @@ GET https://api.elections.kalshi.com/v1/social/profile/metrics?nickname=Delta0x&
 
 **Example:**
 ```
-GET https://api.elections.kalshi.com/v1/social/profile?nickname=Delta0x
+GET https://api.elections.kalshi.com/v1/social/profile?nickname=LBG21
 ```
 
 ---
@@ -235,7 +235,7 @@ GET https://api.elections.kalshi.com/v1/social/whitelisted_profiles
 
 **Example:**
 ```
-GET https://api.elections.kalshi.com/v1/search/social_profiles?query=Delta&limit=50
+GET https://api.elections.kalshi.com/v1/search/social_profiles?query=LBG&limit=50
 ```
 
 ---
@@ -357,22 +357,6 @@ for (const user of leaderboard.rank_list) {
     `https://api.elections.kalshi.com/v1/social/profile/metrics?nickname=${user.nickname}&since_day_before=0`
   );
 }
-```
-
-### Track User PnL Over Time
-```javascript
-const username = 'Delta0x';
-
-// Get different time period metrics
-const allTime = await fetch(`/social/profile/metrics?nickname=${username}&since_day_before=0`);
-const monthly = await fetch(`/social/profile/metrics?nickname=${username}&since_day_before=30`);
-const weekly = await fetch(`/social/profile/metrics?nickname=${username}&since_day_before=7`);
-const daily = await fetch(`/social/profile/metrics?nickname=${username}&since_day_before=1`);
-
-// Calculate period performance
-const monthlyPnL = (monthly.metrics.pnl - weekly.metrics.pnl) / 10000; // Last 23 days
-const weeklyPnL = (weekly.metrics.pnl - daily.metrics.pnl) / 10000;   // Last 6 days
-const dailyPnL = daily.metrics.pnl / 10000;                           // Last 24 hours
 ```
 
 ### Find Category Specialists
