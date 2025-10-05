@@ -9,17 +9,11 @@ https://api.elections.kalshi.com/v1
 
 ## Authentication
 
-### Public Endpoints
-Most endpoints are public and don't require authentication.
+Most endpoints are **public** and don't require any authentication. Private endpoints are clearly marked and listed in a separate section below.
 
-### Private Endpoints
-Private endpoints require session authentication with:
-- `cookie`: Session token (format: `sessions=...`)
-- `x-csrf-token`: CSRF protection token
-- `origin`: https://kalshi.com
-- `referer`: https://kalshi.com/
+---
 
-## Endpoints
+## Public Endpoints (No Authentication Required)
 
 ### 1. User Profile Holdings
 **Endpoint:** `GET /social/profile/holdings`
@@ -246,10 +240,26 @@ GET https://api.elections.kalshi.com/v1/search/social_profiles?query=Delta&limit
 
 ---
 
-### 7. User Timeline (Private)
+## Private Endpoints (Authentication Required)
+
+Private endpoints require session authentication with:
+- `cookie`: Session token (format: `sessions=...`)
+- `x-csrf-token`: CSRF protection token
+- `origin`: https://kalshi.com
+- `referer`: https://kalshi.com/
+
+### How to Get Authentication Headers
+1. Open kalshi.com in your browser
+2. Log in to your account
+3. Open Developer Tools → Network tab
+4. Find any API request to api.elections.kalshi.com
+5. Copy the `cookie` and `x-csrf-token` headers
+6. Use these in your API requests
+
+### 1. User Timeline
 **Endpoint:** `GET /users/{userId}/social/timeline`
 
-**Description:** Fetches user's timeline feed with posts and comments. **Requires authentication.**
+**Description:** Fetches user's timeline feed with posts and comments.
 
 **Parameters:**
 | Parameter | Type | Required | Description |
@@ -288,6 +298,11 @@ GET https://api.elections.kalshi.com/v1/search/social_profiles?query=Delta&limit
 ```
 GET https://api.elections.kalshi.com/v1/users/{userId}/social/timeline?limit=100&filter=hot&timeframe=daily
 ```
+
+### 2. Other Private Endpoints (Mentioned in Scripts)
+- `/users/{userId}/deposits` - User deposit history
+- `/users/{userId}/balance` - Account balance
+- `/users/{userId}/social/profile/metrics` - Detailed metrics with portfolio value
 
 ---
 
